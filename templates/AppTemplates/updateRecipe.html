@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Update Recipe{% endblock title %}
+{% block body %}
+
+
+<div class="container my-5">
+    <h1 class="mb-4 ">UPDATE Your Recipies Here!!!</h1>
+
+<form action="{% url 'updateRecipe' recipeobj.id %}" method="POST" enctype="multipart/form-data">
+{{UpdateForm.as_p}}
+{% csrf_token %}
+
+<button type="submit" class="btn btn-primary mt-3">Update</button>
+<a data-bs-toggle="modal" data-bs-target="#delete-modal" class="btn btn-secondary mt-3 ms-2">Delete</a>
+
+</form>
+
+
+
+{% comment %} delete confirmation {% endcomment %}
+<div class="modal fade" id="delete-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="{%url 'deleteRecipe' recipeobj.id %}" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Note</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete recipe?</p>
+            {% csrf_token %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+{% endblock body %}

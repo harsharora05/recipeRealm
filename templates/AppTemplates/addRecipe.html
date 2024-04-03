@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Add Recipe{% endblock title %}
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4 ">Add Your Recipies Here!!!</h1>
+
+<form action="{% url 'addRecipe' %}" method="POST" enctype="multipart/form-data">
+{{Rform.as_p}}
+{% csrf_token %}
+<button type="submit" class="btn btn-primary mt-3">Add Recipe</button>
+</form>
+</div>
+{% endblock body %}

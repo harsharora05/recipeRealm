@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+ 
+
+
+<section id="health-news" class="py-5 bg-light">
+  <div class="container">
+      <div class="row">
+        {% for d in data  %}
+          <div class="col-lg-6">
+              <img src="{{d.urlToImage}}" class="img-fluid rounded" alt="Health News">
+          </div>
+          <div class="col-lg-6">
+              <h2 class="mb-4">Latest Health News</h2>
+              <p class="lead">{{d.title}}.</p>
+              <p>{{d.description |truncatewords:400}}</p>
+              <a href="{{d.url}}" target="_blank" class="btn btn-primary">Read More</a>
+          </div>
+
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
+
+<section id="popular-recipes" class="py-5">
+  <div class="container">
+      <h2 class="text-center mb-4">Popular Recipes</h2>
+
+      <div class="row">
+        {% for fr in famousRecipies  %}
+          <div class="col-lg-4 my-4">
+              <div class="card recipe-card">
+                  <img  src="{{fr.recipe_photo.url}}" style="width:100%; height:200px" class="card-img-top" alt="">
+                  <div class="card-body recipe-card-body">
+                      <h5 class="card-title recipe-card-title">{{fr.title}}</h5>
+                      <p class="card-text">{{fr.category}} | {{fr.meal_prefrence}}</p>
+                      <a href="{% url 'explore' fr.id %}" class="btn btn-primary">View Recipe</a>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+  </div>
+</section>
+
+
+<section id="categories" class="py-5 bg-light">
+  <div class="container">
+      <h2 class="text-center mb-4">Browse by Categories</h2>
+      <div class="row my-4">
+          <div class="col-lg-4 my-4">
+              <div class="card ">
+                  <div class="card-body">
+                      <h5 class="card-title">Breakfast</h5>
+                      <p class="card-text">Start your day with a delicious breakfast.</p>
+                      <a href="category/BREAKFAST" class="btn btn-primary">Explore</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 my-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Lunch</h5>
+                      <p class="card-text">Satisfying recipes for your midday meal.</p>
+                      <a href="category/LUNCH" class="btn btn-primary">Explore</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 my-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Dinner</h5>
+                      <p class="card-text">Delicious dinner recipes for any occasion.</p>
+                      <a href="category/DINNER" class="btn btn-primary">Explore</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+{% endblock body %}

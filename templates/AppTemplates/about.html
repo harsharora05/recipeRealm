@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Join Community{% endblock title %}
+
+{% block body %}
+{% load static %}
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="display-4">About Us</h2>
+                <p class="lead">Welcome to RecipeRealm, your go-to destination for delicious recipes
+                    from around the world. Our mission is to make cooking fun, easy, and accessible to
+                    everyone.</p>
+                <p>Whether you're a seasoned chef or just starting out in the kitchen, we've got something
+                    for you. From quick weeknight dinners to extravagant desserts, our collection of
+                    recipes has been curated with love and passion.</p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'pic1.svg' %}" style="height:400px; width:300px;" alt="About Us Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="join-community" class="bg-secondary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="display-4">Join Our Community</h2>
+                <p class="lead">Be part of our growing community of food lovers!</p>
+                <p>Love cooking and want to share your favorite recipes with the world?
+                    You can contribute your own recipes to our platform!</p>
+                    
+                {% if user.is_authenticated %}
+                <a href="{% url 'addRecipe' %}" class="btn btn-light btn-lg">Add Recipe</a>
+                {% else %}
+                <a type="button"class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#login-modal">
+                    Login
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

@@ -1,0 +1,50 @@
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+  
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Login Here!!
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+  
+                <form action="{% url 'user_login' %}" method="POST">
+  
+  
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Username</label>
+                        <input type="text" class="form-control" name='username' id="exampleFormControlInput1"
+                            placeholder="username">
+                    </div>
+  
+
+                    <div class="mb-3">
+  
+                        <label for="inputPassword5" class="form-label">Password</label>
+                        <input type="password" name="password" id="inputPassword5" class="form-control"
+                            aria-describedby="passwordHelpBlock">
+                        {% csrf_token %}
+  
+                        <div class="gap-2 mt-5 d-md-flex justify-content-between align-items-center">
+  
+                          <p> Don't have Account?
+                              <a type="button" class="nav-link text-primary" data-bs-toggle="modal" data-bs-target="#registration-modal">
+                                  Register Here
+                              </a>
+                                  
+                           </p>
+  
+                           <div class="d-grid gap-1 d-md-block">
+                          <button type="submit" class="btn btn-primary ">Login</button>
+                           </div>
+  
+                </form>
+            </div>
+        </div>
+  
+  
+    </div>
+  </div>

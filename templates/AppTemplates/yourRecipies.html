@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Your Recipies{% endblock title %}
+
+{% block body %}
+
+{% if ownerRecipes|length < 1 %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="display-4">Currently you don't have any recipe.</h1>
+      <h2 class="subheading">Join our community by adding your first recipe</h2>
+      <a class="btn btn-primary" href="{% url "addRecipe" %}">Add</a>
+    </div>
+  </div>
+</div>
+
+
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        {% for recipe in ownerRecipes  %}
+      <!-- Card 1 -->
+      <div class="col-md-4 my-4">
+        <div class="card">
+          <img src="{{recipe.recipe_photo.url}}" style="height:200px; width:100%" class="card-img-top" alt="Recipe Image">
+          <div class="card-body">
+            <h5 class="card-title">{{recipe.title}}</h5>
+            <p class="card-text">{{recipe.category}} | {{recipe.meal_prefrence}}</p>
+            <div class="d-grid gap-2 d-md-block">
+              <a href="{% url 'explore' recipe.id %}" class="btn btn-primary">Explore</a>
+              
+              <a href="{% url 'updateRecipe' recipe.id %}" class="btn btn-primary">Update</a>  
+              
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+  
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+{% endblock body %}

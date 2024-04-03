@@ -1,0 +1,59 @@
+<div class="modal fade" id="registration-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Registration
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="{%url 'userRegisteration'%}" method="post">
+
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name='fname' id="exampleFormControlInput1"
+                            placeholder="First Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name='lname' id="exampleFormControlInput1"
+                            placeholder="Last Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Username</label>
+                        <input type="text" class="form-control" name='username' id="exampleFormControlInput1"
+                            placeholder="username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name='email' id="exampleFormControlInput1"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="inputPassword5" class="form-label">Password</label>
+                        <input type="password" name="password" id="inputPassword5" class="form-control"
+                            aria-describedby="passwordHelpBlock">
+
+                        <label for="inputPassword5" class="form-label">Confirm Password</label>
+                        <input type="password" id="inputPassword5" class="form-control" name="confirmPassword"
+                            aria-describedby="passwordHelpBlock">
+                      {% csrf_token %}
+
+                        <div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary mt-2">Register</button>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock title %}
+
+{% block body %}
+
+
+<div class="container my-4">
+    <h2>Search results : </h2>
+    {% if Allresult|length < 1 %}
+   <p>No search results</p>
+    Your search query : <b>{{query}}</b> did not match any documents. <br>
+    Suggestions:
+    <ul>
+    <li>Make sure that all words are spelled correctly.</li>
+    <li>Try more general keywords.</li>
+    </li>
+    </ul>
+    {% endif %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        {% for result in Allresult %}
+      <!-- Card 1 -->
+      <div class="col-md-4 my-4">
+        <div class="card">
+          <img src="{{result.recipe_photo.url}}" style="height:200px; width:100%" class="card-img-top" alt="Recipe Image">
+          <div class="card-body">
+            <h5 class="card-title">{{result.title}}</h5>
+            <p class="card-text">{{result.category}} | {{result.meal_prefrence}}</p>
+            <a href="{% url 'explore' result.id %}" class="btn btn-primary">Explore</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+{% endblock body %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Category {% endblock title %}
+
+{% block body %}
+
+
+
+
+
+<h1 class="mt-5 mx-5"> <strong>{{catTitle}} Recipies  </strong></h1>
+{% if recipies %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        {% for recipe in recipies  %}
+      <!-- Card 1 -->
+      <div class="col-md-4 my-4">
+        <div class="card">
+          <img src="{{recipe.recipe_photo.url}}" style="height:200px; width:100%" class="card-img-top" alt="Recipe Image">
+          <div class="card-body">
+            <h5 class="card-title">{{recipe.title}}</h5>
+            <p class="card-text">{{recipe.category}} | {{recipe.meal_prefrence}}</p>
+            <a href="{% url 'explore' recipe.id %}" class="btn btn-primary">Explore</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+  
+    </div>
+  </div>
+
+
+  {% else %}
+
+<h1 class="mt-5 mx-5">No Recipies Found For This Category </h1>
+
+  {% endif %}
+
+{% endblock body %}
