@@ -25,7 +25,7 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 SECRET_KEY = 'django-insecure-ewjtwp32&u$uz!5n_y&b_zp^92)m-t1f3t&ik+^(133-t-!9$i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
     'baseApp',
 ]
 
@@ -131,3 +132,25 @@ MEDIA_ROOT = MEDIA_DIR
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# TINYMCE_JS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.1/tinymce.min.js'
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "320px",
+    "width": "960px",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+    "fullscreen insertdatetime media table paste code help wordcount spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+    "language": "en-us",  # To force a specific language instead of the Django current language.
+}
+
+
+
+
+
+

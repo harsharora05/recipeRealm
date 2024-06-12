@@ -28,12 +28,16 @@
           <div class="card-body">
             <h5 class="card-title">{{recipe.title}}</h5>
             <p class="card-text">{{recipe.category}} | {{recipe.meal_prefrence}}</p>
+            {% if recipe.active %}
             <div class="d-grid gap-2 d-md-block">
               <a href="{% url 'explore' recipe.id %}" class="btn btn-primary">Explore</a>
-              
               <a href="{% url 'updateRecipe' recipe.id %}" class="btn btn-primary">Update</a>  
-              
             </div>
+            {% else %}
+            <div class="">
+              <p><small>Your recipe will be live with in 24Hours...&#128524;</small></p>
+            </div>
+            {% endif %}
            
 
           </div>

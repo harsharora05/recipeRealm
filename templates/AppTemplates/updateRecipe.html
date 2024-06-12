@@ -7,7 +7,9 @@
     <h1 class="mb-4 ">UPDATE Your Recipies Here!!!</h1>
 
 <form action="{% url 'updateRecipe' recipeobj.id %}" method="POST" enctype="multipart/form-data">
-{{UpdateForm.as_p}}
+  
+{{UpdateForm}}
+
 {% csrf_token %}
 
 <button type="submit" class="btn btn-primary mt-3">Update</button>

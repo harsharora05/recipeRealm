@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import date,timedelta
 import requests
 from .forms import RecipeForm
-import random
+
 
 
 # Create your views here.
@@ -43,7 +43,7 @@ def categoryPage(request,slug):
         categories = recipe._meta.get_field('category').choices
 
         # getting recipies using slug
-        recipies = recipe.objects.filter(category = slug)
+        recipies = recipe.objects.filter(category = slug,active =True)
 
         # for displaying heading on category page
         str= slug.lower()
@@ -71,9 +71,9 @@ def searchQuery(request):
         if len(query) > 40:
                 Allresult = recipe.objects.none()
         else:
-                Alltitle=recipe.objects.filter(title__icontains = str(query))
-                Allcategory=recipe.objects.filter(category__icontains = str(query))
-                Allmeal_prefrence=recipe.objects.filter(meal_prefrence__icontains = str(query))
+                Alltitle=recipe.objects.filter(title__icontains = str(query) , active = True)
+                Allcategory=recipe.objects.filter(category__icontains = str(query) ,active = True)
+                Allmeal_prefrence=recipe.objects.filter(meal_prefrence__icontains = str(query),active = True)
                 semiResult = Alltitle.union(Allcategory)
                 Allresult=Allmeal_prefrence.union(semiResult)
         
@@ -91,7 +91,7 @@ def explore(request,id):
         categories = recipe._meta.get_field('category').choices
 
 
-        Recipe = get_object_or_404(recipe,id=id)
+        Recipe = get_object_or_404(recipe,id=id,active = True)
 
         return render (request,"AppTemplates/explore.html" ,context = {"Recipe":Recipe,"categories":categories})
 
@@ -147,12 +147,16 @@ def updateRecipe(request,id):
                 recipeD  = recipe.objects.filter(id=id)
                 recipeD.delete()
                 recipeform =RecipeForm(data = request.POST , files = request.FILES)
+
                 if recipeform.is_valid():
                       form = recipeform.save(commit = False)
-                      form.recipeOwner = request.user  
+                      form.recipeOwner = request.user
+                      form.ingredients_HTML =form.ingredients
+                      form.steps_HTML =form.steps
+                      form.active = False 
                       form.save()
 
-                      messages.success(request,"Updated sucessfully")
+                      messages.success(request,"Updated sucessfully....It will be live within 24 hours")
                       return HttpResponseRedirect(reverse('index'))
 
         return render(request,'AppTemplates/updateRecipe.html',context={"UpdateForm":UpdateForm , "recipeobj" :recipeobj,"categories":categories})
@@ -163,15 +167,18 @@ def updateRecipe(request,id):
 def addRecipe(request):
         # for navbar recipes 
         categories = recipe._meta.get_field('category').choices
+
         if request.method == 'POST':
                 Rform = RecipeForm(data=request.POST, files=request.FILES)
                 if Rform.is_valid():
                         recipeForm = Rform.save(commit=False)
                         recipeForm.recipeOwner=request.user
+                        recipeForm.ingredients_HTML =recipeForm.ingredients
+                        recipeForm.steps_HTML =recipeForm.steps
                         recipeForm.save()
                    
                    
-                        messages.success(request,'sucessfully added')
+                        messages.success(request,'sucessfully added....Recipe will be live With in 24Hours')
                         return HttpResponseRedirect(reverse('index'))
                 else:
                         print(Rform.errors)

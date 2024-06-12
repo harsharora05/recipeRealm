@@ -23,13 +23,13 @@
         <div class="col-md-8">
             <div class="recipe-section text-center">
                 <h1 class="recipe-title"style="font-size:50px;">{{Recipe.title}}</h1>
-                <img src="{{Recipe.recipe_photo.url}}" alt="" class="recipe-img">
+                <img src="{{Recipe.recipe_photo.url}}" style="height:400px; width:500px;" alt="" class="recipe-img">
                 <p><small> <em>{{Recipe.category}} |  {{Recipe.meal_prefrence}} </em></small></p>
                 <div class="recipe-card">
-                    <h2><strong>Ingredients </strong></h2>
-                    <p class="my-3">{{Recipe.ingredients|linenumbers|linebreaksbr}}</p>
+                    <h2><strong>Ingredients</strong></h2>
+                    <p class="my-3">{{Recipe.ingredients_HTML | safe}}</p>
                     <h2><strong>Steps</strong></h2>
-                    <p class="my-3">{{Recipe.steps|linenumbers|linebreaksbr}}</p>
+                    <p class="my-3">{{Recipe.steps_HTML |safe}}</p>
                     <br>
                     <p>Serve and enjoy!</p>
     
