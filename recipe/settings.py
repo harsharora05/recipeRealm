@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +24,10 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ewjtwp32&u$uz!5n_y&b_zp^92)m-t1f3t&ik+^(133-t-!9$i'
+SECRET_KEY = config('KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -104,6 +106,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME" : config('CLOUD_NAME'), 
+    "API_KEY" : config('API_KEY'),  
+   "API_SECRET" : config('API_SECRET'),   
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -126,8 +135,8 @@ STATICFILES_DIRS =[
 
 
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = MEDIA_DIR
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = MEDIA_DIR
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
