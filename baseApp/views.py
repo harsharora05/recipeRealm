@@ -142,19 +142,22 @@ def updateRecipe(request,id):
                         'steps':RecipeObject.steps,
                         'recipe_photo':RecipeObject.recipe_photo
                 })
-        if request.method =='POST':
-                # last object delete
-                recipeD  = recipe.objects.filter(id=id)
-                recipeD.delete()
-                recipeform =RecipeForm(data = request.POST , files = request.FILES)
 
-                if recipeform.is_valid():
-                      form = recipeform.save(commit = False)
-                      form.recipeOwner = request.user
-                      form.ingredients_HTML =form.ingredients
-                      form.steps_HTML =form.steps
-                      form.active = False 
-                      form.save()
+        if request.method =='POST':
+
+                recipeForm = RecipeForm(data = request.POST , files = request.FILES)
+
+                if recipeForm.is_valid():
+                      OldRecipe  = recipe.objects.get(id=id)
+                      Newform = recipeForm.save(commit=False)
+
+                      OldRecipe.recipeOwner = request.user
+                      OldRecipe.steps = Newform.steps
+                      OldRecipe.steps_HTML = Newform.steps
+                      OldRecipe.ingredients = Newform.ingredients
+                      OldRecipe.ingredients_HTML = Newform.ingredients
+                      OldRecipe.active = False 
+                      OldRecipe.save()
 
                       messages.success(request,"Updated sucessfully....It will be live within 24 hours")
                       return HttpResponseRedirect(reverse('index'))
