@@ -157,6 +157,13 @@ def updateRecipe(request,id):
                       OldRecipe.ingredients = Newform.ingredients
                       OldRecipe.ingredients_HTML = Newform.ingredients
                       OldRecipe.active = False 
+
+                      if(request.FILES == None):
+                              OldRecipe.recipe_photo = OldRecipe.recipe_photo
+                      else:
+                              OldRecipe.recipe_photo = request.FILES['recipe_photo']
+                      
+
                       OldRecipe.save()
 
                       messages.success(request,"Updated sucessfully....It will be live within 24 hours")
